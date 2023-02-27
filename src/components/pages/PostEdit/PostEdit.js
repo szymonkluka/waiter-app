@@ -8,7 +8,6 @@ const PostEdit = () => {
   const { id } = useParams();
   const postData = useSelector(state => getPostByID(state, id));
 
-
   return (
     <>
       <div className="mb-2">

@@ -3,13 +3,10 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-quill/dist/quill.snow.css'; // ES6
 import { useForm } from 'react-hook-form';
-import { getAllCategories } from '../../../redux/categoryRedux';
-import { useSelector } from 'react-redux';
 import { FormControl } from 'react-bootstrap';
 
 
 const PostForm = ({ action, ...props }) => {
-
 
   const changeStatus = (value) => {
     if (value === 'Free' && value === 'Cleaning') {
@@ -18,28 +15,25 @@ const PostForm = ({ action, ...props }) => {
     if (value === 'Busy') {
       setDescription('0');
     }
+    if (value === 'Cleaning') {
+      setAuthor('0');
+    }
     setCategory(value);
 
   };
 
 
   const { register, handleSubmit: validate, formState: { errors } } = useForm();
-
-
   const [category, setCategory] = useState(props.category);
-  const categories = useSelector(getAllCategories);
-  const [categoryError, setCategoryError] = useState(false)
-
   const [title] = useState(props.title);
   const [title2, setTitle2] = useState(props.title2)
   const [author, setAuthor] = useState(props.author);
   const [description, setDescription] = useState(props.description);
-  const [publishedDate, setPublishedDate] = useState(props.publishedDate);
-  const [mainContent, setMainContent] = useState(props.mainContent)
+
 
 
   const handleSubmit = () => {
-    action({ title, title2, author, publishedDate, description, mainContent, category });
+    action({ title, title2, author, description, category });
   };
 
   return (
@@ -66,7 +60,7 @@ const PostForm = ({ action, ...props }) => {
                 </Form.Select>
               </div>
             </div>
-            {categoryError && <small className="d-block form-text text-danger mt-2">Please choose your category</small>}
+
 
           </div>
 

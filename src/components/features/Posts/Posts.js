@@ -2,18 +2,10 @@ import { Link } from "react-router-dom";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { getAllPosts } from "../../../redux/postsRedux";
 import { useSelector } from "react-redux";
-import { useState } from "react";
-import { Modal } from "react-bootstrap";
-import { Navigate, useParams } from "react-router-dom";
-import { getPostByID } from "../../../redux/postsRedux";
-import { deletePost } from "../../../redux/postsRedux";
+
 import React from 'react';
 
 const Posts = () => {
-
-  const { id } = useParams();
-  const postData = useSelector(state => getPostByID(state, id));
-
   const posts = useSelector(getAllPosts);
 
   return (
