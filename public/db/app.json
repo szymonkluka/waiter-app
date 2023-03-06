@@ -2,12 +2,12 @@
   "posts": [
     {
       "id": "Table 1",
-      "status": "Reserved",
+      "status": "Cleaning",
       "content1": "0"
     },
     {
       "id": "Table 2",
-      "status": "Cleaning",
+      "status": "Free",
       "content1": "0",
       "content2": "6",
       "moneyAmmount": "23"

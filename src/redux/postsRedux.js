@@ -33,13 +33,7 @@ export const fetchData = () => {
 export const postsReducer = (statePart = [], action) => {
   switch (action.type) {
     case EDIT_DATA:
-      return statePart.map((post) => {
-        if (post.id === action.payload.id) {
-          return { ...post, ...action.payload };
-        } else {
-          return post;
-        }
-      });
+      return statePart.map(post => (post.id === action.payload.id) ? { ...post, ...action.payload } : post);
     case DELETE_POST:
       return statePart.filter(post => post.id !== action.payload)
     case ADD_POST:
