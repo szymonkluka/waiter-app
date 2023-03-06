@@ -11,10 +11,10 @@ export const editPost = payload => ({ type: EDIT_POST, payload });
 export const getData = (payload) => ({ type: GET_DATA, payload });
 export const editedData = (payload) => ({ type: EDIT_DATA, payload })
 export const changeStatus = (payload) => ({ type: CHANGE_STATUS, payload });
-export const getStatus = ({ getDataPost }) => getDataPost;
+export const getStatus = ({ tableRequestPending }) => tableRequestPending;
 
 
-const createActionName = actionName => `posts/${actionName}`;
+const createActionName = actionName => `app/posts/${actionName}`;
 const DELETE_POST = createActionName('DELETE_POST')
 const ADD_POST = createActionName('ADD_POST');
 const EDIT_POST = createActionName('EDIT_POST');
@@ -33,7 +33,13 @@ export const fetchData = () => {
 export const postsReducer = (statePart = [], action) => {
   switch (action.type) {
     case EDIT_DATA:
-      return statePart.map(post => (post.id === action.payload.id) ? { ...post, ...action.payload } : post);
+      return statePart.map((post) => {
+        if (post.id === action.payload.id) {
+          return { ...post, ...action.payload };
+        } else {
+          return post;
+        }
+      });
     case DELETE_POST:
       return statePart.filter(post => post.id !== action.payload)
     case ADD_POST:
@@ -43,7 +49,7 @@ export const postsReducer = (statePart = [], action) => {
     case GET_DATA:
       return [...action.payload];
     case CHANGE_STATUS: {
-      return [...action.payload];
+      return action.payload;
     }
     default:
       return statePart;
@@ -66,6 +72,7 @@ export const addChangedData = (changeData) => {
       },
       body: JSON.stringify(changeData),
     };
+
     fetch(`${POSTS_URL}/posts/${changeData.id}`, options)
       .then((response) => response.json())
       .then((data) => dispatch(editedData(data)));

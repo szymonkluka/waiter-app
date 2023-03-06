@@ -1,7 +1,9 @@
 {
   "posts": [
     {
-      "id": "Table 1"
+      "id": "Table 1",
+      "status": "Reserved",
+      "content1": "0"
     },
     {
       "id": "Table 2",

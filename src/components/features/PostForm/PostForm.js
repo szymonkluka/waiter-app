@@ -17,12 +17,6 @@ const PostForm = () => {
     post2 && PostID
   );
 
-  const [title] = useState(post.title)
-  const [status, setStatus] = useState(post.status);
-  const [content1, setContent1] = useState(post.content1);
-  const [content2, setContent2] = useState(post.content2);
-  const [moneyAmmount, setMoneyAmmount] = useState(post.moneyAmmount);
-
 
   const handleSubmit = (value) => {
     const editedData = {
@@ -36,6 +30,12 @@ const PostForm = () => {
     setContent2(post.content2)
     setMoneyAmmount(post.moneyAmmount)
   };
+
+  const [title] = useState(post.title)
+  const [status, setStatus] = useState(post.status);
+  const [content1, setContent1] = useState(post.content1);
+  const [content2, setContent2] = useState(post.content2);
+  const [moneyAmmount, setMoneyAmmount] = useState(post.moneyAmmount);
 
 
   const handleStatus = (value) => {
@@ -101,7 +101,7 @@ const PostForm = () => {
                   max="10"
                   value={content1}
                   onChange={(e) => setContent1(e.target.value)}
-                  placeholder="Nr" style={{ category: content1.reserved ? "none" : "inline-block", width: "58px", height: "30px", textAlign: "center", marginRigt: "50px", }} />
+                  placeholder="Nr" style={{ width: "58px", height: "30px", textAlign: "center", marginRigt: "50px", }} />
 
               </div>
               <div className="p-2 flex-2">/</div>
