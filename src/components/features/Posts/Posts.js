@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
 import { Card, Button, Row, Col } from "react-bootstrap";
-import { getAllPosts } from "../../../redux/postsRedux";
-import { useSelector } from "react-redux";
-
-import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getAllPosts } from '../../../redux/postsRedux';
 
 const Posts = () => {
   const posts = useSelector(getAllPosts);
@@ -16,8 +14,8 @@ const Posts = () => {
             <Card.Body>
               <div className="d-flex">
                 <div className="p-1 flex-3">
-                  <strong><h2>{post.title}</h2></strong></div>
-                <div className="p-3 flex-2"><strong>Status: </strong>{post.category}</div>
+                  <strong><h2>{post.id}</h2></strong></div>
+                <div className="p-3 flex-2"><strong>Status: </strong>{post.status}</div>
                 <div className="ms-auto p-2">
                   <Link to={"/post/edit/" + post.id}>
                     <Button variant="primary">Show more</Button>
@@ -31,6 +29,7 @@ const Posts = () => {
       }
     </Row >
   );
-}
 
-export default Posts;
+};
+
+export default Posts

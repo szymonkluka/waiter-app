@@ -1,0 +1,35 @@
+{
+  "posts": [
+    {
+      "id": "Table 1"
+    },
+    {
+      "id": "Table 2",
+      "status": "Cleaning",
+      "content1": "0",
+      "content2": "6",
+      "moneyAmmount": "23"
+    },
+    {
+      "id": "Table 3",
+      "status": "Cleaning",
+      "content1": "0",
+      "content2": "",
+      "moneyAmmount": ""
+    },
+    {
+      "id": "Table 4",
+      "status": "Busy",
+      "content1": "0",
+      "content2": "2",
+      "moneyAmmount": "0"
+    },
+    {
+      "id": "Table 5",
+      "status": "Reserved",
+      "content1": "2",
+      "content2": "3",
+      "moneyAmmount": "120"
+    }
+  ]
+}

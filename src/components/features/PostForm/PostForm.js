@@ -1,56 +1,67 @@
-import { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import "react-datepicker/dist/react-datepicker.css";
-import 'react-quill/dist/quill.snow.css'; // ES6
-import { useForm } from 'react-hook-form';
-import { FormControl } from 'react-bootstrap';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Col, Form, Row, FormControl } from 'react-bootstrap';
+import { addChangedData } from '../../../redux/postsRedux';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { post2 } from '../../../post2';
+import { getPostById } from '../../../redux/postsRedux';
 
 
-const PostForm = ({ action, ...props }) => {
+const PostForm = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const PostID = useSelector((state) => getPostById(state, id));
+  const [post, setPost] = useState(
+    post2 && PostID
+  );
 
-  const changeStatus = (value) => {
-    if (value === 'Free' && value === 'Cleaning') {
-      setAuthor('0');
-    }
-    if (value === 'Busy') {
-      setDescription('0');
-    }
-    if (value === 'Cleaning') {
-      setAuthor('0');
-    }
-    setCategory(value);
+  const [title] = useState(post.title)
+  const [status, setStatus] = useState(post.status);
+  const [content1, setContent1] = useState(post.content1);
+  const [content2, setContent2] = useState(post.content2);
+  const [moneyAmmount, setMoneyAmmount] = useState(post.moneyAmmount);
 
+
+  const handleSubmit = (value) => {
+    const editedData = {
+      id, title, status, content1, content2, moneyAmmount,
+    };
+    dispatch(addChangedData(editedData));
+    navigate('/');
+    setPost(PostID);
+    setStatus(post.status)
+    setContent1(post.content1)
+    setContent2(post.content2)
+    setMoneyAmmount(post.moneyAmmount)
   };
 
 
-  const { register, handleSubmit: validate, formState: { errors } } = useForm();
-  const [category, setCategory] = useState(props.category);
-  const [title] = useState(props.title);
-  const [title2, setTitle2] = useState(props.title2)
-  const [author, setAuthor] = useState(props.author);
-  const [description, setDescription] = useState(props.description);
+  const handleStatus = (value) => {
 
-
-
-  const handleSubmit = () => {
-    action({ title, title2, author, description, category });
+    if (value === 'Free' || value === 'Cleaning') {
+      setContent1('0');
+    }
+    setStatus(value);
   };
+
 
   return (
-
-
     <Row className="justify-content-center">
       <Col className="col-12">
-
         <Form>
+          <h2>
+            <strong>{post.title}</strong>
+          </h2>
 
           <div className="mb-2" controlId="formBasicEmail">
             <div className="d-flex">
-              <div className="p-1 flex me-2"><Form.Label style={({ marginRight: "5px" })}><strong>Category:</strong></Form.Label></div>
+              <div className="p-1 flex me-2"><Form.Label style={({ marginRight: "5px" })}><strong>Status:</strong></Form.Label></div>
               <div className="">
                 <Form.Select aria-label="Default select example"
-                  value={category}
-                  onChange={(e) => changeStatus(e.target.value)}
+                  value={status}
+                  onChange={(e) => handleStatus(e.target.value)}
                   placeholder="Nr" style={{ width: "280px", height: "40px", }}
                 >
                   <option value='Free'>Free</option>;
@@ -60,25 +71,21 @@ const PostForm = ({ action, ...props }) => {
                 </Form.Select>
               </div>
             </div>
-
-
           </div>
 
-          {category === 'Busy' ? (
+          {status === 'Busy' ? (
             <div className="mb-2" controlId="formBasicEmail">
               <div className="d-flex">
                 <div className="p-1 flex-2"><Form.Label style={({ marginLeft: "0px" })}><strong>Ammount:</strong></Form.Label></div>
                 <div className="p-2 flex-2"><Form.Label style={({ marginLeft: "20px" })}>$</Form.Label></div>
                 <div className="p-1 flex">
                   <FormControl
-
-                    {...register("description", { required: true, minLength: 1 })}
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    value={moneyAmmount}
+                    onChange={(e) => setMoneyAmmount(e.target.value)}
                     placeholder="Nr" style={{ width: "45px", height: "30px", marginRigt: "50px", }} />
+
                 </div>
               </div>
-              {errors.description && <small className="d-block form text-danger mt-2">This field is required (minimal length: 20)</small>}
             </div>
           ) : (
             ''
@@ -89,31 +96,32 @@ const PostForm = ({ action, ...props }) => {
               <div className="p-1 flex-2 me-4"><Form.Label style={({ marginLeft: "0px" })}><strong>People:</strong></Form.Label></div>
               <div className="p-1 flex">
                 <FormControl
-                  {...register("author", { required: true, minLength: 1 })}
-                  value={author}
-                  onChange={(e) => setAuthor(e.target.value)}
-                  placeholder="Nr" style={{ category: category.reserved ? "none" : "inline-block", width: "45px", height: "30px", marginRigt: "50px", }} />
+                  input type="number"
+                  min="1"
+                  max="10"
+                  value={content1}
+                  onChange={(e) => setContent1(e.target.value)}
+                  placeholder="Nr" style={{ category: content1.reserved ? "none" : "inline-block", width: "58px", height: "30px", textAlign: "center", marginRigt: "50px", }} />
+
               </div>
               <div className="p-2 flex-2">/</div>
               <div className="p-1 flex">
                 <FormControl
-                  {...register("title2", { required: true, minLength: 1 })}
-                  value={title2}
-                  onChange={(e) => setTitle2(e.target.value)}
-                  placeholder="Nr" style={{ width: "45px", height: "30px", marginRigt: "50px", }} />
+                  input type="number"
+                  min="1"
+                  max="10"
+                  value={content2}
+                  onChange={(e) => setContent2(e.target.value)}
+                  placeholder="Nr" style={{ width: "58px", height: "30px", marginRigt: "50px", }} />
               </div>
             </div>
-            {errors.description && <small className="d-block form text-danger mt-2">This field is required (minimal length: 1)</small>}
           </div>
-
-          <Button
-            onClick={validate(handleSubmit)}
-            className="my-3">Add post
+          <Button onClick={(handleSubmit)}>Add post
           </Button>
         </Form>
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default PostForm;
+export default PostForm
