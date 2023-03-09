@@ -13,18 +13,14 @@ const TableForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const table = useSelector((state) => getTableById(state, id));
-  // const [post, setPost] = useState(
-  //   post2 && PostID
-  // );
 
   const { register, handleSubmit: validate, formState: { errors } } = useForm();
-  const handleSubmit = (value) => {
+  const handleSubmit = () => {
 
-    const handleStatus2 = (value) => {
+    const handleStatus2 = () => {
       if (setMaxPeopleAmount < (peopleAmount)) {
         // eslint-disable-next-line no-unused-expressions
         setPeopleAmount === setMaxPeopleAmount;
-
       }
 
       setMaxPeopleAmount(peopleAmount);
@@ -42,14 +38,6 @@ const TableForm = () => {
       dispatch(addChangedData(editedData, handleStatus2));
       navigate('/');
     }
-
-
-    // to Cie juz nie obchodzi, bo usunąłeś ten komponent i przeszedłeś na home page:
-    // setPost(PostID);
-    // setStatus(post.status)
-    // setContent1(post.content1)
-    // setContent2(post.content2)
-    // setMoneyAmmount(post.moneyAmmount)
   };
 
   const [title] = useState(table.title)
@@ -58,11 +46,7 @@ const TableForm = () => {
   const [maxPeopleAmount, setMaxPeopleAmount] = useState(table.maxPeopleAmount);
   const [bill, setBill] = useState(table.bill);
 
-
   const handleStatus = (value) => {
-
-
-
     if (value === 'Free' || value === 'Cleaning') {
       setPeopleAmount('0');
     }
@@ -70,18 +54,14 @@ const TableForm = () => {
       setBill('0');
     }
     setStatus(value);
-
   };
 
   const handleStatus2 = (value) => {
     if (setMaxPeopleAmount < (peopleAmount)) {
       // eslint-disable-next-line no-unused-expressions
       setPeopleAmount === setMaxPeopleAmount;
-
     }
-
     setMaxPeopleAmount(peopleAmount);
-
   };
 
 
@@ -111,7 +91,6 @@ const TableForm = () => {
               </div>
             </div>
           </div>
-
           <div className="mb-2" controlId="formBasicEmail">
             <div className="d-flex">
               <div className="p-1 flex-2 me-4"><Form.Label style={({ marginLeft: "0px" })}><strong>People:</strong></Form.Label></div>
