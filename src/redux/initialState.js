@@ -1,6 +1,6 @@
 const initialState = {
-  posts: [],
-  getDataPost: '',
+  tables: [],
+
 };
 
 export default initialState

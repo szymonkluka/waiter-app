@@ -1,37 +1,39 @@
 {
-  "posts": [
+  "tables": [
     {
       "id": "Table 1",
-      "status": "Free",
-      "content1": "0"
+      "status": "Reserved",
+      "peopleAmount": "1",
+      "maxPeopleAmount": "2",
+      "bill": "0"
     },
     {
       "id": "Table 2",
-      "status": "Free",
-      "content1": "0",
-      "content2": "6",
-      "moneyAmmount": "23"
+      "status": "Reserved",
+      "peopleAmount": "3",
+      "maxPeopleAmount": "6",
+      "bill": "22"
     },
     {
       "id": "Table 3",
-      "status": "Cleaning",
-      "content1": "0",
-      "content2": "",
-      "moneyAmmount": ""
+      "status": "Busy",
+      "peopleAmount": "0",
+      "maxPeopleAmount": "2",
+      "bill": "0"
     },
     {
       "id": "Table 4",
       "status": "Busy",
-      "content1": "0",
-      "content2": "2",
-      "moneyAmmount": "0"
+      "peopleAmount": "0",
+      "maxPeopleAmount": "2",
+      "bill": "23"
     },
     {
       "id": "Table 5",
       "status": "Reserved",
-      "content1": "2",
-      "content2": "3",
-      "moneyAmmount": "120"
+      "peopleAmount": "2",
+      "maxPeopleAmount": "3",
+      "bill": "120"
     }
   ]
 }

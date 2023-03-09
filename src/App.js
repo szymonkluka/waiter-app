@@ -1,29 +1,34 @@
 import { Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Home from "./components/pages/Home/Home"
-import PostEdit from './components/pages/PostEdit/PostEdit';
-import PostForm from './components/features/PostForm/PostForm';
+import TableEdit from './components/pages/TableEdit/TableEdit';
+import TableForm from './components/features/TableForm/TableForm';
 import Header from "./components/views/Header/Header";
 import Footer from "./components/views/Footer/Footer";
-import { useEffect } from 'react';
 import { fetchData } from './redux/postsRedux';
 import { useDispatch } from 'react-redux';
+import ClipLoader from "react-spinners/ClipLoader";
 
 const App = () => {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchData());
-  }, [dispatch]);
+  setTimeout(() => {
+    <ClipLoader
+      size={150}
+      aria-label="Loading Spinner"
+      data-testid="loader"
+    />
+  }, 2000);
+
+  const dispatch = useDispatch();
+  dispatch(fetchData());
 
   return (
     <Container>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path='/post/:id' element={<PostForm />} />
-        <Route path="/post/edit/:id" element={<PostEdit />} />
-
+        <Route path='/table/:id' element={<TableForm />} />
+        <Route path="/table/edit/:id" element={<TableEdit />} />
       </Routes>
       <Footer />
     </Container>

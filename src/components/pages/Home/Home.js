@@ -1,6 +1,6 @@
 import { Col, Row } from "react-bootstrap";
 
-import Posts from "../../features/Posts/Posts";
+import Tables from "../../features/Tables/Tables";
 
 const Home = () => {
 
@@ -11,7 +11,7 @@ const Home = () => {
           <h1>All tables</h1>
         </Col>
       </Row>
-      <Posts />
+      <Tables />
     </>
   )
 }
